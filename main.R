@@ -48,7 +48,7 @@ s2_box_w = apply(box_W_int, 1, var)
 s2_u_hat = mean(s2_box_w) 
 s2_box_x_hat = max(mean((row_mean_box_w - mean_box_x_hat) ^ 2) - s2_u_hat/r, 
                    0.2*(mean((row_mean_box_w - mean_box_x_hat)^2))) 
-## estimate transformation matrix A_box and probability vector p
+## estimate misclassification matrix A_box and probability vector p
 a = rep(0,(J+1)); a[1] = min(w); a[2:J] = C; a[J+1] = max(w)
 Ap = fn_box(mean_box_x_hat,s2_box_x_hat,s2_u_hat,lam_hat,a)
 A_box = Ap$A_box 
