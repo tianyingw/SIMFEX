@@ -29,13 +29,10 @@ for(i in 1:n){y[i] = rbinom(1,size = 1,prob = pr[i])}
 J = 5 # categorize W into five categories based on quintiles
 C = rep(0, J-1)
 for(j in 1:(J-1)){C[j] = quantile(w,j/J)} 
-## estimate lambda in Box-Cox transformation (two methods are okay.)
-lam_hat = optimize(fn_likeli,lower = 0,upper = 2)$minimum 
-if(FALSE){
-  library(MASS)
-  b <- boxcox(lm(w ~ 1))
-  lam_hat <- b$x[which.max(b$y)]  
-}
+## estimate lambda in Box-Cox transformation
+library(MASS)
+b <- boxcox(lm(w ~ 1))
+lam_hat <- b$x[which.max(b$y)]  
 ## estimate mean_box_x, s2_u, s2_box_x
 box_W_int = matrix(0,n,r)
 for(j in 1:r){
