@@ -12,18 +12,6 @@ Box <- function(x,lam){
 Inv_Box <- function(y,lam){
   if(lam==0){return(exp(y))}else{
     return((lam*y+1)^(1/lam))}} 
-## log-likelihood of lam in Box_Cox
-fn_likeli <- function(lam){
-  out = 0
-  W = as.vector(W_int)
-  mu_box_w = mean(Box(W,lam))
-  sd_box_w = sd(Box(W,lam))
-  for(i in 1:length(W)){
-    out = out - 0.5*(Box(W[i],lam)-mu_box_w)^2/sd_box_w^2
-    out = out -log(sd_box_w) + (lam-1)*log(abs(W[i]))
-  }
-  return(-out)
-}
 ## estimate misclassification matrix and p using the BoxCox method
 fn_box <- function(mean_box_x,s2_box_x,s2_u,lam,a){
   fn_x <-  function(x){
