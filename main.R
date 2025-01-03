@@ -1,6 +1,7 @@
 #############################################################
 ####### Code for logit model
 #############################################################
+library(MASS)
 source('functions.R')
 # 1.generate data------------
 ## parameters values
@@ -30,7 +31,6 @@ J = 5 # categorize W into five categories based on quintiles
 C = rep(0, J-1)
 for(j in 1:(J-1)){C[j] = quantile(w,j/J)} 
 ## estimate lambda in Box-Cox transformation
-library(MASS)
 b <- boxcox(lm(w ~ 1))
 lam_hat <- b$x[which.max(b$y)]  
 ## estimate mean_box_x, s2_u, s2_box_x
